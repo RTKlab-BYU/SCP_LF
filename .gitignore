@@ -1,0 +1,7 @@
+#input/output folder for the data
+input/* 
+output/* 
+csv/*
+images/*
+
+```
