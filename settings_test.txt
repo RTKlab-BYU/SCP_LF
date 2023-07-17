@@ -1,13 +1,13 @@
-Group Name	filter_in	filter_out	SPE Type	Sample Amount
-1	200pg@0		C12 75um	200pg
-2	200pg@1		C12 50um	200pg
-3	200pg@2		C8 75um	200pg
-4	2ng@0		C12 75um	2ng
-5	2ng@1		C12 50um	2ng
-6	2ng@2		C8 75um	2ng
-7	10ng@0		C12 75um	10ng
-8	10ng@1		C12 50um	10ng
-9	10ng@2		C8 75um	10ng
-10	20ng@0		C12 75um	20ng
-11	20ng@1		C12 50um	20ng
-12	20ng@2		C8 75um	20ng
+Group Name	filter_in	filter_out	SPE Type	Diameter	Sample Amount
+1	200pg@0		C12	75um	200pg
+2	200pg@1		C12	50um	200pg
+3	200pg@2		C8	75um	200pg
+4	2ng@0		C12	75um	2ng
+5	2ng@1		C12	50um	2ng
+6	2ng@2		C8	75um	2ng
+7	10ng@0		C12	75um	10ng
+8	10ng@1		C12	50um	10ng
+9	10ng@2		C8	75um	10ng
+10	20ng@0		C12	75um	20ng
+11	20ng@1		C12	50um	20ng
+12	20ng@2		C8	75um	20ng
