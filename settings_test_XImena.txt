@@ -1,0 +1,4 @@
+Group Name	filter_in	filter_out	Cells type	Volume	Concentration
+1	500nL1ng@0		HeLa	500nL	1ng
+2	500nL25ng@0		HeLa	500nL	2.5ng
+3	200nL_@0		HeLa	200nL	1ng
