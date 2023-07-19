@@ -1,0 +1,9 @@
+Group Name	filter_in	filter_out	SPE Type	Sample Amount
+C12 75um 200pg	200pg@0		C12 75um	200pg
+C12 50um  200pg	200pg@1		C12 50um	200pg
+C8 75um 200pg	200pg@2		C8 75um	200pg
+Back Flush 200pg	200pg@3		Back Flush	200pg
+C12 75um 10ng	10ng@0		C12 75um	10ng
+C12 50um 10ng	10ng@1		C12 50um	10ng
+C8 75um 10ng	10ng@2		C8 75um	10ng
+Back Flush 10ng	10ng@3	cat	Back Flush	10ng
