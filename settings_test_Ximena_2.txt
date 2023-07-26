@@ -1,0 +1,4 @@
+Group Name	filter_in	filter_out	Volume	Concentration
+A	500nL25ng		500	2.5ng
+B	500nL1ng		500	1ng
+C	200nL		    200	1ng
