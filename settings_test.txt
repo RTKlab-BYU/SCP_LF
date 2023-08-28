@@ -1,3 +1,6 @@
-Conditions	filter_in	filter_out	Acquisition Type	Sample Amount
-DIANN	02ng_@1		DIA	200pg
-DDA	200pg@0		DDA	200pg
+Conditions	filter_in	filter_out	Gradient Length	Acquisition Mode
+20min WWA	12mz_02ng_@0	blk	20 min	WWA
+40min WWA	12mz_02ng_@1	blk	40 min	WWA
+40min DDA	1x02nguL@1	blk	40 min	DDA
+20min DIA	DIA50_02ng_@2	blk	20 min	DIA
+40min DIA	DIA50_02ng_@3	blk	40 min	DIA
