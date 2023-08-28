@@ -1,0 +1,5 @@
+Conditions	filter_in	filter_out	Gradient Length	Cell Type
+20min HeLa	12mz_02ng_@0	blk	20 min	HeLa
+40min HeLa	12mz_02ng_@1	blk	40 min	HeLa
+20min K562	12mz_02ngK@0	blk	20 min	K562
+40min K562	12mz_02ngK@1	blk	40 min	K562
