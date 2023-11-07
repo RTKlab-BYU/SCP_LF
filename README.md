@@ -8,7 +8,7 @@ Single cell workflow for label free with Jupyter notebook and data manage system
 3.	Open the folder in VS Code  
 4.	Open a new terminal and type “pip install -r requirements.txt’ and then hit enter.  
 ## Analyzing the Proteome:  
-1.	Place the output files from Proteome Discoverer in your unzipped folder.  
+1.	Place the output files from Proteome Discoverer in your unzipped folder. make sure Abundances was exported from PD    
 2.	Open Single_cell_workflow.ipynb.  
 3.	First decide if you want automatically exported files, if so near the top of the notebook change WRITE_OUTPUT = True.  
 a.	Average ID’s and the corresponding standard deviations and 95% confidence intervals, CVs, protein lists, principal components, and volcano graph comparisons will be exported.  
