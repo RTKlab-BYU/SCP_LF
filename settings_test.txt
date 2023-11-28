@@ -1,3 +1,3 @@
 Conditions	filter_in	filter_out	Gradient Length	Acquisition Mode
-20min DIA	DIA50_02ng_@0	blk	20 min	DIA
-40min DIA	DIA50_02ng_@1	blk	40 min	DIA
+cow	r3@0	blk	20 min	DIA
+chicken	r4@0	blk	40 min	DIA
