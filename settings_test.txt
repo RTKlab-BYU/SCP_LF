@@ -1,3 +1,28 @@
-Conditions	filter_in	filter_out	Gradient Length	Acquisition Mode
-cow	r3@0	blk	20 min	DIA
-chicken	r4@0	blk	40 min	DIA
+Conditions	filter_in	filter_out	Fraction
+f1	D2		1
+f2	D3		2
+f3	D4		3
+f4	D5		4
+f5	D6		5
+f6	D7		6
+f7	D8		7
+f8	D9		8
+f9	E2		9
+f10	E3		10
+f11	E4		11
+f12	E5		12
+f13	E6		13
+f14	E7		14
+f15	E8		15
+f16	E9		16
+f17	F2		17
+f18	F3		18
+f19	F4		19
+f20	F5		20
+f21	F6		21
+f22	F7		22
+f23	F8		23
+f24	F9		24
+f25	G2		25
+f26	G3		26
+f27	G4		27
