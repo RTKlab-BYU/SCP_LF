@@ -29,6 +29,10 @@ group_sample_wells = [
 LC_methods = [
      ["D:/Methods/LC_Methods/StepLC/test_2_30min.m?HyStar_LC",
      "D:/Methods/LC_Methods/StepLC/StepLC_45min.m?HyStar_LC"],
+     ["D:/Methods/LC_Methods/StepLC/test_2_30min.m?HyStar_LC",
+     "D:/Methods/LC_Methods/StepLC/StepLC_45min.m?HyStar_LC"],
+     ["D:/Methods/LC_Methods/StepLC/test_2_30min.m?HyStar_LC",
+     "D:/Methods/LC_Methods/StepLC/StepLC_45min.m?HyStar_LC"]
 ]
 
 MS_method = "D:\Methods\MS_methods\dia-PASEF_pyDIAid_0.64-1.45_1500V_400-1000_100msRamp.m?OtofImpacTEMControl" # MS method can't change without calibration
@@ -245,6 +249,8 @@ if Block_between_channels:
                 + current_suffix
         final_table.at[index,"Sample ID"] = new_filename
         final_table.at[index,"Methods"] = group_methods[current_suffix_index][current_channel]
+        final_table.at[index,"Separation Method"] = LC_methods[current_suffix_index][current_channel]
+
 
 else:
     #format tables
