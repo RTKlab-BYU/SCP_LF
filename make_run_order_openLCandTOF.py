@@ -5,8 +5,8 @@ import numpy as np
 d_file_dest = "D:\\Data\\StepLC"
 
 group_prefixes = [
-    "HeLa_ATG_KNO_Col1-3",
-    "HeLa_ATG_KNO_Col1-6",
+    "HeLa_ATG_KNO_Col1-3", #optional: "stage","wellplate","wells"
+    "HeLa_ATG_KNO_Col1-6", #required: "Locations"
     "Blank"
     ] #these don't get saved
 channel_prefixes = ["_10min_","_20min_"] #this too
@@ -27,11 +27,11 @@ group_sample_wells = [
 ]
 
 LC_methods = [
-     ["D:/Methods/LC_Methods/StepLC/test_2_30min.m?HyStar_LC",
+     ["D:/Methods/LC_Methods/StepLC/StepLC_30min.m?HyStar_LC",
      "D:/Methods/LC_Methods/StepLC/StepLC_45min.m?HyStar_LC"],
-     ["D:/Methods/LC_Methods/StepLC/test_2_30min.m?HyStar_LC",
+     ["D:/Methods/LC_Methods/StepLC/StepLC_30min.m?HyStar_LC",
      "D:/Methods/LC_Methods/StepLC/StepLC_45min.m?HyStar_LC"],
-     ["D:/Methods/LC_Methods/StepLC/test_2_30min.m?HyStar_LC",
+     ["D:/Methods/LC_Methods/StepLC/StepLC_30min.m?HyStar_LC",
      "D:/Methods/LC_Methods/StepLC/StepLC_45min.m?HyStar_LC"]
 ]
 
@@ -111,7 +111,7 @@ def tidy_table_openLC(old_table):
 
 def tidy_table_MS(old_table):
     table = old_table.copy()
-    table["Vial"] = table["Locations"].str.split(" ").str[2]
+    table["Vial"] = "B"+ table["Locations"].str.split(" ").str[2]
     table["Method Set"] = ""
     table["Injection Method"] = "Standard"
     table["MS Method"] = MS_method
