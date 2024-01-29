@@ -6,16 +6,16 @@ import os
 from pathlib import Path
 
 
-INPUT_FILES = {"10 min":"10min_January/report.tsv","20 min":"20min_January/report.tsv","18 min":"report.tsv"}
-# INPUT_FILES = {"20 min":"report.tsv"}
+INPUT_FILES = {"10 min":"10min_January/report.tsv","12 min":"Lavender/report.tsv","18 min": "report.tsv","20 min":"20min_January/report.tsv"}
+# INPUT_FILES = {"20 min":"20min_January/report.tsv"}
 File_Category_Name = "Gradient Length"
-FILTERS = ["10ng","16ng","1ng","200pg"]
-# FILTERS = ["16ng","1ng","200pg"]
+FILTERS = ["16ng","20ng","10ng","1ng","200pg","02ng_QC_A100_R100"]
+# FILTERS = ["200pg"]
 Filter_Category_Name = "Sample Amount"
 WRITE_OUTPUT = True
 APPFOLDER = "./"
 # output_name = "ThyRTs"
-output_name = "All Stdev"
+output_name = "Lavender"
 
 
 def plot_RTstdev_boxplot(RTs, plot_options, username):
@@ -128,30 +128,41 @@ i=0
 for eachType in INPUT_FILES.keys():
     eachFile = INPUT_FILES[eachType]
     allData = pd.read_table(eachFile,sep="\t")
+    # print(allData.size)
+    allData = allData.loc[allData["Lib.Q.Value"]<0.01]
     
     for eachFilter in FILTERS:
         currentData = allData[allData["Run"].str.contains(eachFilter)]
         currentData = currentData[~currentData["Run"].str.contains("1775")]
-        currentData = currentData.groupby("Precursor.Id").agg(
+        currentData = currentData[~currentData["Run"].str.contains("1762")]
+        currentData = currentData[~currentData["Run"].str.contains("1763")]
+        
+        if currentData.size >0:
+            RT_Length = max(currentData["RT"].tolist()) - min(currentData["RT"].tolist())
+            print("Count "+str(RT_Length) + " " + eachFilter)
+            print(max(currentData.groupby("Precursor.Id").size().reset_index(name="count")["count"].to_list()))
+            currentData = currentData.groupby("Precursor.Id").agg(
                                                                     # Median= ("RT","median"),
                                                                     # Mean=("RT","mean"),
                                                                     Stdev=("RT",np.std)).reset_index()
-        # currentData[File_Category_Name] = eachType
-        # currentData[Filter_Category_Name] = eachFilter
-        # currentData["Group Name"] = eachType + " " + eachFilter
-        new_names = [str(x) + " " + eachType + " " + eachFilter for x in currentData.columns.to_series()[1:]]
-        
-        mapping  = dict(zip(currentData.columns.to_series()[1:], new_names))
-        currentData = currentData.rename(columns=mapping)
+            # currentData[File_Category_Name] = eachType
+            # currentData[Filter_Category_Name] = eachFilter
+            # currentData["Group Name"] = eachType + " " + eachFilter
+            new_names = [str(x) + " " + str(RT_Length) + " " + eachFilter for x in currentData.columns.to_series()[1:]]
+            
+            mapping  = dict(zip(currentData.columns.to_series()[1:], new_names))
+            currentData = currentData.rename(columns=mapping)
         if currentData.size >0:
-            all_names.append("Stdev "+eachType + " " + eachFilter)
+            all_names.append("Stdev "+str(RT_Length) + " " + eachFilter)
             if i == 0:
                 allPeaks = currentData
             else:
                 allPeaks = pd.merge(allPeaks,currentData,how="inner")
                 # allPeaks = pd.concat([allPeaks,currentData])
-        i = i + 1
-
+            i = i + 1
+        if i >0:
+            # print(allPeaks.size)
+            pass
 # print(all_names)
 # print(allPeaks)
 allPeaks = allPeaks.melt(value_vars=all_names,
