@@ -4,17 +4,28 @@ library(dplyr)
 library(limma)
 
 
-filepaths = c("20min_January/report.pg_matrix.tsv")
+#filepaths = c("20min_January/report-first-pass.pg_matrix.tsv")
+#filepaths = c("20min_January/report.pg_matrix.tsv")
+#filepaths = c("10min_January/report-first-pass.pg_matrix.tsv")
+#filepaths = c("10min_January/report.pg_matrix.tsv")
+
+#filepaths = c("20min_January/report-first-pass.pr_matrix.tsv")
+#filepaths = c("20min_January/report.pr_matrix.tsv")
+#filepaths = c("10min_January/report-first-pass.pr_matrix.tsv")
+filepaths = c("10min_January/report.pr_matrix.tsv")
+
 group_names = list()
 group_names[[filepaths[1]]] = c("Colony 1.3", "Colony 1.6")
 
+#isProtein = TRUE
+isProtein = FALSE
 
 filepath = filepaths[1]
 OUTPUT_FILENAME = paste0(gsub("\\.tsv","",filepath),"_normalized.tsv")
 
 group_filters = list()
 group_filters[[filepaths[1]]] = c("Col1-3","Col1-6")
-out_filter = c("M@di")
+out_filter = c("N3","N4","H6","M3","L3","J10","J11")
 
 ################Functions################
 
@@ -35,8 +46,12 @@ DIANN.AbundanceMatrix = function(proteinFile, isProtein=TRUE, eachFilenameConven
   y
 }
 
-DIANN.FilterByName = function(abundances, filterIn, filterOut){
-  name = "Accession"
+DIANN.FilterByName = function(abundances, filterIn, filterOut, isProtein = TRUE){
+  if(isProtein){
+    name = "Accession"
+  } else {
+    name = "Annotated Sequence"
+  }
   for(eachFilter in filterIn) {
     abundances = dplyr::select_if(abundances, 
                                              grepl(paste0(name,"|",eachFilter),
@@ -54,12 +69,12 @@ DIANN.FilterByName = function(abundances, filterIn, filterOut){
 y = list()
 
 for (filepath in filepaths){
-  x = DIANN.AbundanceMatrix(proteinFile = filepath)
+  x = DIANN.AbundanceMatrix(proteinFile = filepath, isProtein = isProtein)
 
   i = 1  
   for(eachGroup in group_names[[filepath]]) {
     y[[eachGroup]] = x %>%
-      DIANN.FilterByName(filterIn = group_filters[[filepath]][i], filterOut = out_filter)
+      DIANN.FilterByName(filterIn = group_filters[[filepath]][i], filterOut = out_filter, isProtein = isProtein)
     i = i + 1
     
   }
@@ -69,6 +84,11 @@ for (filepath in filepaths){
 remove(x)
 
 ################Make Matrix################
+if(isProtein){
+  name = "Accession"
+} else {
+  name = "Annotated Sequence"
+}
 
 Conditions = c()
 maxnumcells = 0
@@ -77,8 +97,8 @@ i = 1
 for (filepath in filepaths){
   for(eachGroup in group_names[[filepath]]) {
     mycols = colnames(y[[eachGroup]])
-    mycols = mycols[mycols != "Accession"]
-    myrows = y[[eachGroup]][["Accession"]]
+    mycols = mycols[mycols != name]
+    myrows = y[[eachGroup]][[name]]
     current = y[[eachGroup]][mycols] %>%
       as.matrix()
     colnames(current) = mycols
@@ -119,10 +139,12 @@ minCells = floor(maxnumcells*0.7) #30% missing values and above will be removed
 DataNorm = SCnorm(mySCData, Conditions,
                    PrintProgressPlots = TRUE,
                      FilterCellNum = minCells, withinSample = exampleGC,
-                   NCores=8)
+                   NCores=1)
 
 NormedData = SingleCellExperiment::normcounts(DataNorm)
 
 NormedData[NormedData == 0] = NA
+
+NormedData = as.data.frame(NormedData)
 
 write_tsv(NormedData, OUTPUT_FILENAME)
