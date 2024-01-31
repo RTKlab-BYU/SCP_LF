@@ -1,6 +1,3 @@
 Conditions	filter_in	filter_out	Sample Amount	Acquisition Mode
-Colony 1.3	Col1-3@0	N3,N4,H6,M3,L3	4ng	DDA
-Colony 1.6	Col1-6@0	J10,J11	4ng	Greedy
 Bulk 200pg	200pg@0	1762,1763	4ng	DDA
 Bulk 10ng	10ng@0	1775	4ng	DDA
-Reagent Blanks	Blank@0	BA1,BK1	4ng	DDA
